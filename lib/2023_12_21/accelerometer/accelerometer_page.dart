@@ -6,7 +6,7 @@ class AccelerometerPage extends StatelessWidget {
   const AccelerometerPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
 
     final double centerX = MediaQuery.of(context).size.width / 2 - 50;
