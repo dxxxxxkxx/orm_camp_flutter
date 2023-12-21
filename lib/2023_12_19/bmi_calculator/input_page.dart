@@ -25,7 +25,6 @@ class _InputPageState extends State<InputPage> {
 
   @override
   void dispose() {
-    _save();
     _heightController.dispose();
     _weightController.dispose();
     super.dispose();
@@ -40,8 +39,6 @@ class _InputPageState extends State<InputPage> {
       _heightController.text = '$height';
       _weightController.text = '$weight';
     }
-
-    await Future.delayed(const Duration(milliseconds: 500));
   }
 
   Future<void> _save() async {
@@ -51,8 +48,6 @@ class _InputPageState extends State<InputPage> {
       await prefs.setDouble('height', _height!);
       await prefs.setDouble('weight', _weight!);
     }
-
-    await Future.delayed(const Duration(milliseconds: 500));
   }
 
   @override
@@ -90,7 +85,7 @@ class _InputPageState extends State<InputPage> {
                 margin: const EdgeInsets.only(top: 16.0),
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState?.validate() ?? false) {
                       _height = double.tryParse(_heightController.text.trim());
                       _weight = double.tryParse(_weightController.text.trim());
@@ -103,6 +98,8 @@ class _InputPageState extends State<InputPage> {
                                 BmiPage(height: _height!, weight: _weight!),
                           ),
                         );
+
+                        await _save();
                       }
                     }
                   },
