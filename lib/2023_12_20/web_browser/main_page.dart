@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
@@ -117,9 +118,12 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       body: PopScope(
+          canPop: false,
           onPopInvoked: (final bool didPop) async {
             if (await _controller.canGoBack()) {
               await _controller.goBack();
+            } else {
+              SystemNavigator.pop();
             }
           },
           child: WebViewWidget(controller: _controller)),
