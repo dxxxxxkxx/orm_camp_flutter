@@ -37,8 +37,11 @@ class _GridPageState extends State<GridPage> {
           _currentPage = 0;
         }
 
-        _controller.animateToPage(_currentPage,
-            duration: const Duration(milliseconds: 350), curve: Curves.easeIn);
+        _controller.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeIn,
+        );
       });
     }
 
@@ -54,15 +57,21 @@ class _GridPageState extends State<GridPage> {
               controller: _controller,
               children: _imageFileList!.map((final XFile imageFile) {
                 return FutureBuilder<Uint8List>(
-                  future: imageFile.readAsBytes(),
-                  builder: (final BuildContext context,
-                          final AsyncSnapshot<Uint8List> snapshot) =>
-                      ((snapshot.data != null) &&
-                              (snapshot.connectionState !=
-                                  ConnectionState.waiting))
-                          ? Image.memory(snapshot.data!, width: double.infinity)
-                          : const Center(child: CircularProgressIndicator()),
-                );
+                    future: imageFile.readAsBytes(),
+                    builder: (
+                      final BuildContext context,
+                      final AsyncSnapshot<Uint8List> snapshot,
+                    ) {
+                      if (snapshot.data != null &&
+                          snapshot.connectionState != ConnectionState.waiting) {
+                        return Image.memory(
+                          snapshot.data!,
+                          width: double.infinity,
+                        );
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    });
               }).toList(),
             )
           : const Center(child: Text('No image file')),
