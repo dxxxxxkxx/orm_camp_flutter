@@ -4,18 +4,18 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class WebPage extends StatefulWidget {
+  const WebPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<WebPage> createState() => _WebPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _WebPageState extends State<WebPage> {
   late final WebViewController _controller;
   final String _url;
 
-  _MainPageState() : _url = 'https://www.google.com/';
+  _WebPageState() : _url = 'https://www.google.com/';
 
   @override
   void initState() {
