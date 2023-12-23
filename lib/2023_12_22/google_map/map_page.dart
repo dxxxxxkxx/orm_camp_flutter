@@ -12,33 +12,33 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  final LocationSettings _settings;
   final Completer<GoogleMapController> _controller;
-  late CameraPosition _currentLocation;
-  bool _isLoaded;
-
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  final Set<Polyline> _polylines;
+  int _index;
+  LatLng? _prevLatLng;
+  CameraPosition? _currentLocation;
 
   _MapPageState()
-      : _controller = Completer(),
-        _isLoaded = false;
+      : _settings = const LocationSettings(),
+        _controller = Completer(),
+        _polylines = {},
+        _index = 0;
 
   @override
   void initState() {
     super.initState();
     _initCurrentLocation();
+    _tracePath();
   }
 
   Future<void> _initCurrentLocation() async {
     final Position position = await _determinePosition();
-    _currentLocation = CameraPosition(
-        target: LatLng(position.latitude, position.longitude), zoom: 17);
-
     setState(() {
-      _isLoaded = true;
+      _currentLocation = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 17.0,
+      );
     });
   }
 
@@ -79,28 +79,52 @@ class _MapPageState extends State<MapPage> {
     return await Geolocator.getCurrentPosition();
   }
 
+  void _tracePath() {
+    Geolocator.getPositionStream(locationSettings: _settings)
+        .listen((final Position position) {
+      _prevLatLng = _currentLocation?.target;
+      _currentLocation = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 17.0,
+      );
+
+      final Polyline polyline = Polyline(
+        polylineId: PolylineId('${_index++}'),
+        points: [
+          _prevLatLng ?? _currentLocation!.target,
+          _currentLocation!.target
+        ],
+        color: Colors.red,
+        width: 3,
+      );
+
+      setState(() {
+        _polylines.add(polyline);
+      });
+
+      _moveCameraPosition(_currentLocation!);
+    });
+  }
+
+  Future<void> _moveCameraPosition(final CameraPosition newLocation) async {
+    final GoogleMapController controller = await _controller.future;
+    await controller.animateCamera(CameraUpdate.newCameraPosition(newLocation));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoaded
+      body: _currentLocation != null
           ? GoogleMap(
               mapType: MapType.normal,
-              initialCameraPosition: _currentLocation,
+              polylines: _polylines,
+              initialCameraPosition: _currentLocation!,
               onMapCreated: (final GoogleMapController controller) {
                 _controller.complete(controller);
               },
+              zoomControlsEnabled: false,
             )
           : const Center(child: CircularProgressIndicator()),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text('To the lake!'),
-      //   icon: const Icon(Icons.directions_boat),
-      // ),
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
