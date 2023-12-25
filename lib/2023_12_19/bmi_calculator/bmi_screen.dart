@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BmiPage extends StatelessWidget {
+class BmiScreen extends StatelessWidget {
   final double _height;
   final double _weight;
 
-  const BmiPage({super.key, required double height, required double weight})
+  const BmiScreen({super.key, required double height, required double weight})
       : _weight = weight,
         _height = height;
 

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bmi_page.dart';
+import 'bmi_screen.dart';
 
-class InputPage extends StatefulWidget {
-  const InputPage({super.key});
+class InputScreen extends StatefulWidget {
+  const InputScreen({super.key});
 
   @override
-  State<InputPage> createState() => _InputPageState();
+  State<InputScreen> createState() => _InputScreenState();
 }
 
-class _InputPageState extends State<InputPage> {
+class _InputScreenState extends State<InputScreen> {
   final GlobalKey<FormState> _formKey;
   final TextEditingController _heightController;
   final TextEditingController _weightController;
   double? _height;
   double? _weight;
 
-  _InputPageState()
+  _InputScreenState()
       : _formKey = GlobalKey(),
         _heightController = TextEditingController(),
         _weightController = TextEditingController();
@@ -100,7 +100,7 @@ class _InputPageState extends State<InputPage> {
                           context,
                           MaterialPageRoute(
                             builder: (_) =>
-                                BmiPage(height: _height!, weight: _weight!),
+                                BmiScreen(height: _height!, weight: _weight!),
                           ),
                         );
 

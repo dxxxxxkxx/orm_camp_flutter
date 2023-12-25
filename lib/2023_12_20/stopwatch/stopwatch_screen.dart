@@ -2,20 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-class StopwatchPage extends StatefulWidget {
-  const StopwatchPage({super.key});
+class StopwatchScreen extends StatefulWidget {
+  const StopwatchScreen({super.key});
 
   @override
-  State<StopwatchPage> createState() => _StopwatchPageState();
+  State<StopwatchScreen> createState() => _StopwatchScreenState();
 }
 
-class _StopwatchPageState extends State<StopwatchPage> {
+class _StopwatchScreenState extends State<StopwatchScreen> {
   late Timer _timer;
   final List<String> _lapTimes;
   int _time;
   bool _isRunning;
 
-  _StopwatchPageState()
+  _StopwatchScreenState()
       : _lapTimes = [],
         _time = 0,
         _isRunning = false;

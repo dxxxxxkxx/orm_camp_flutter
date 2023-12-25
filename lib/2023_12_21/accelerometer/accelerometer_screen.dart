@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
-class AccelerometerPage extends StatelessWidget {
-  const AccelerometerPage({super.key});
+class AccelerometerScreen extends StatelessWidget {
+  const AccelerometerScreen({super.key});
 
   @override
   Widget build(final BuildContext context) {

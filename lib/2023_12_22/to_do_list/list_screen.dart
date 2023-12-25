@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import 'add_page.dart';
+import 'add_screen.dart';
 import 'to_do.dart';
 import 'to_do_list_tile.dart';
 
-class ListPage extends StatefulWidget {
-  const ListPage({super.key});
+class ListScreen extends StatefulWidget {
+  const ListScreen({super.key});
 
   @override
-  State<ListPage> createState() => _ListPageState();
+  State<ListScreen> createState() => _ListScreenState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _ListScreenState extends State<ListScreen> {
   late final Box<ToDo> _box;
   bool _isLoaded;
 
-  _ListPageState() : _isLoaded = false;
+  _ListScreenState() : _isLoaded = false;
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ class _ListPageState extends State<ListPage> {
             onPressed: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => AddPage(box: _box)),
+                MaterialPageRoute(builder: (_) => AddScreen(box: _box)),
               );
 
               setState(() {});

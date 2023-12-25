@@ -3,20 +3,20 @@ import 'package:hive/hive.dart';
 
 import 'to_do.dart';
 
-class AddPage extends StatefulWidget {
+class AddScreen extends StatefulWidget {
   final Box<ToDo> box;
 
-  const AddPage({super.key, required this.box});
+  const AddScreen({super.key, required this.box});
 
   @override
-  State<AddPage> createState() => _AddPageState();
+  State<AddScreen> createState() => _AddScreenState();
 }
 
-class _AddPageState extends State<AddPage> {
+class _AddScreenState extends State<AddScreen> {
   final GlobalKey<FormState> _formKey;
   final TextEditingController _controller;
 
-  _AddPageState()
+  _AddScreenState()
       : _formKey = GlobalKey(),
         _controller = TextEditingController();
 

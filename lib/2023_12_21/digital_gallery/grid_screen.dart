@@ -4,20 +4,20 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class GridPage extends StatefulWidget {
-  const GridPage({super.key});
+class GridScreen extends StatefulWidget {
+  const GridScreen({super.key});
 
   @override
-  State<GridPage> createState() => _GridPageState();
+  State<GridScreen> createState() => _GridScreenState();
 }
 
-class _GridPageState extends State<GridPage> {
+class _GridScreenState extends State<GridScreen> {
   final ImagePicker _picker;
   final PageController _controller;
   List<XFile>? _imageFileList;
   int _currentPage;
 
-  _GridPageState()
+  _GridScreenState()
       : _picker = ImagePicker(),
         _controller = PageController(),
         _currentPage = 0;

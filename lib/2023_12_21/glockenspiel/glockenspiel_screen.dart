@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
-class GlockenspielPage extends StatefulWidget {
-  const GlockenspielPage({super.key});
+class GlockenspielScreen extends StatefulWidget {
+  const GlockenspielScreen({super.key});
 
   @override
-  State<GlockenspielPage> createState() => _GlockenspielPageState();
+  State<GlockenspielScreen> createState() => _GlockenspielScreenState();
 }
 
-class _GlockenspielPageState extends State<GlockenspielPage> {
+class _GlockenspielScreenState extends State<GlockenspielScreen> {
   final Soundpool _soundpool;
   final List<int> _soundIds;
   bool _isLoaded;
 
-  _GlockenspielPageState()
+  _GlockenspielScreenState()
       : _soundpool = Soundpool.fromOptions(options: SoundpoolOptions.kDefault),
         _soundIds = [],
         _isLoaded = false;

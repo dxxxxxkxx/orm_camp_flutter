@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _MapScreenState extends State<MapScreen> {
   final LocationSettings _settings;
   final Completer<GoogleMapController> _controller;
   final Set<Polyline> _polylines;
@@ -19,7 +19,7 @@ class _MapPageState extends State<MapPage> {
   LatLng? _prevLatLng;
   CameraPosition? _currentLocation;
 
-  _MapPageState()
+  _MapScreenState()
       : _settings = const LocationSettings(),
         _controller = Completer(),
         _polylines = {},
