@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'accelerometer_page.dart';
+import 'accelerometer_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const AccelerometerPage(),
+      home: const AccelerometerScreen(),
     );
   }
 }
