@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 import 'add_page.dart';
 import 'to_do.dart';
-import 'to_do_list_view.dart';
+import 'to_do_list_tile.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -66,7 +66,23 @@ class _ListPageState extends State<ListPage> {
         ],
       ),
       body: _isLoaded
-          ? ToDoListView(box: _box)
+          ? ListView(
+              children: _box.values
+                  .map((final ToDo toDo) => ToDoListTile(
+                        toDo: toDo,
+                        check: (final ToDo todo) async {
+                          toDo.isDone = !toDo.isDone;
+                          await toDo.save();
+
+                          setState(() {});
+                        },
+                        delete: (final ToDo toDo) async {
+                          await toDo.delete();
+
+                          setState(() {});
+                        },
+                      ))
+                  .toList())
           : const Center(child: CircularProgressIndicator()),
     );
   }
