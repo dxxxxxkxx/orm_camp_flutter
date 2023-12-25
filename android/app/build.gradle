@@ -22,7 +22,7 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-def mapsApiKey = localProperties.getProperty('MAPS_API_KEY')
+def googleApiKey = localProperties.getProperty('GOOGLE_API_KEY')
 
 android {
     namespace "com.example.orm_camp_flutter"
@@ -51,7 +51,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        manifestPlaceholders += [MAPS_API_KEY: mapsApiKey]
+        manifestPlaceholders += [GOOGLE_API_KEY: googleApiKey]
     }
 
     buildTypes {
