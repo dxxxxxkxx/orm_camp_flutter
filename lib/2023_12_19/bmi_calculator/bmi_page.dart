@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BmiPage extends StatelessWidget {
@@ -51,10 +50,6 @@ class BmiPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final double bmi = _weight / ((_height / 100) * (_height / 100));
-
-    if (kDebugMode) {
-      print('BMI: $bmi');
-    }
 
     return Scaffold(
       appBar: AppBar(title: const Text('비만도 계산기')),
