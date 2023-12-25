@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:orm_camp_flutter/2023_12_19/bmi_calculator/bmi_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bmi_page.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -10,12 +11,16 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _weightController = TextEditingController();
-
+  final GlobalKey<FormState> _formKey;
+  final TextEditingController _heightController;
+  final TextEditingController _weightController;
   double? _height;
   double? _weight;
+
+  _InputPageState()
+      : _formKey = GlobalKey(),
+        _heightController = TextEditingController(),
+        _weightController = TextEditingController();
 
   @override
   void initState() {
@@ -94,7 +99,7 @@ class _InputPageState extends State<InputPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (final BuildContext context) =>
+                            builder: (_) =>
                                 BmiPage(height: _height!, weight: _weight!),
                           ),
                         );
