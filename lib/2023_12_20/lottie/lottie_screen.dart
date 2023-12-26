@@ -22,7 +22,8 @@ class LottieScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double imageRatio = MediaQuery.of(context).size.shortestSide /
-        MediaQuery.of(context).size.longestSide;
+        (MediaQuery.of(context).size.longestSide -
+            MediaQuery.of(context).padding.top);
     final double imageWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
